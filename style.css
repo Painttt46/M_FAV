@@ -1,0 +1,441 @@
+/* ============ ตัวแปรสี / ฟอนต์ ============ */
+:root {
+  --cream: #FFF7EE;
+  --pink: #FFC2D4;
+  --pink-soft: #FFE3EC;
+  --pink-deep: #E64A7B;
+  --pink-deeper: #B8335C;
+  --lav: #E3D6FF;
+  --mint: #CDEFE0;
+  --butter: #FFF0B8;
+  --peach: #FFDCC4;
+  --ink: #5A3A4B;
+  --ink-soft: #8C6B7B;
+  --line: #7B4A5F;
+  --radius: 28px;
+  --font-body: 'Mali', 'Sarabun', 'Noto Sans Thai', system-ui, sans-serif;
+  --font-display: 'Itim', 'Mali', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--ink);
+  background-color: var(--cream);
+  background-image: radial-gradient(#FFD9E4 2px, transparent 2.5px);
+  background-size: 28px 28px;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 24px 16px 8px;
+}
+
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; margin: 0; line-height: 1.25; }
+p { margin: 0; }
+
+:focus-visible { outline: 3px solid var(--pink-deep); outline-offset: 3px; border-radius: 12px; }
+
+/* ============ ของลอยฉากหลัง ============ */
+.bg-float { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.bg-float span {
+  position: absolute;
+  bottom: -60px;
+  opacity: 0;
+  animation: floatUp linear infinite;
+}
+@keyframes floatUp {
+  0%   { transform: translateY(0) translateX(0) rotate(0); opacity: 0; }
+  10%  { opacity: .55; }
+  90%  { opacity: .55; }
+  100% { transform: translateY(-115vh) translateX(var(--drift, 30px)) rotate(var(--spin, 20deg)); opacity: 0; }
+}
+
+/* ============ HERO ============ */
+.hero { text-align: center; padding: 8px 0 32px; }
+
+.ribbon {
+  display: inline-block;
+  background: var(--butter);
+  border: 3px solid #F2D56B;
+  color: #7A5A12;
+  padding: 4px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: .95rem;
+  box-shadow: 0 4px 0 #F2D56B55;
+  transform: rotate(-2deg);
+}
+
+.hero h1 {
+  margin-top: 14px;
+  font-size: clamp(2.3rem, 9vw, 3.8rem);
+  letter-spacing: .5px;
+}
+.hero h1 .name {
+  color: var(--pink-deep);
+  display: inline-block;
+  background: linear-gradient(transparent 62%, var(--pink) 62% 92%, transparent 92%);
+  padding: 0 .15em;
+}
+.sub { margin-top: 4px; color: var(--ink-soft); font-size: 1.05rem; }
+
+.stage { position: relative; margin: 20px auto 6px; max-width: 360px; }
+
+.bubble {
+  position: relative;
+  max-width: 100%;
+  min-height: 3.6em;
+  background: #fff;
+  border: 3px solid var(--pink);
+  border-radius: 22px;
+  padding: 10px 18px;
+  font-weight: 600;
+  box-shadow: 0 5px 0 var(--pink-soft);
+  display: grid;
+  place-items: center;
+  line-height: 1.5;
+}
+.bubble::after, .bubble::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 18px; height: 18px;
+  background: #fff;
+}
+.bubble::before { bottom: -12px; border: 3px solid var(--pink); z-index: 0; }
+.bubble::after  { bottom: -7px; z-index: 1; }
+.bubble.pop { animation: pop .45s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes pop { 0% { transform: scale(.85); } 100% { transform: scale(1); } }
+
+.mascot-btn {
+  display: block;
+  margin: 14px auto 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  width: min(78vw, 280px);
+  -webkit-tap-highlight-color: transparent;
+}
+.mascot { width: 100%; height: auto; overflow: visible; display: block; }
+
+.bunny { transform-box: fill-box; transform-origin: 50% 100%; animation: bob 3s ease-in-out infinite; }
+@keyframes bob {
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  50%      { transform: translateY(-6px) scale(1.01, .995); }
+}
+.shadow { transform-box: fill-box; transform-origin: center; animation: shadowPulse 3s ease-in-out infinite; }
+@keyframes shadowPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(.92); } }
+
+.ear { transform-box: fill-box; transform-origin: 50% 95%; }
+.ear-l { animation: earL 4s ease-in-out infinite; }
+.ear-r { animation: earR 4s ease-in-out infinite .6s; }
+@keyframes earL { 0%, 85%, 100% { transform: rotate(0); } 90% { transform: rotate(-9deg); } 95% { transform: rotate(3deg); } }
+@keyframes earR { 0%, 85%, 100% { transform: rotate(0); } 90% { transform: rotate(9deg); } 95% { transform: rotate(-3deg); } }
+
+.eyes { transform-box: fill-box; transform-origin: center; animation: blink 4.5s infinite; }
+@keyframes blink { 0%, 93%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.1); } }
+
+.arm-l { transform-box: fill-box; transform-origin: 70% 90%; animation: wave 1.6s ease-in-out infinite; }
+@keyframes wave { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(14deg); } }
+
+.scale { transform-box: fill-box; transform-origin: 50% 100%; animation: sway 3.4s ease-in-out infinite; }
+@keyframes sway { 0%, 100% { transform: rotate(-2.5deg); } 50% { transform: rotate(2.5deg); } }
+
+.band-tails { transform-box: fill-box; transform-origin: 100% 40%; animation: flap 1.2s ease-in-out infinite; }
+@keyframes flap { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-9deg); } }
+
+.mascot-btn.jump .bunny { animation: jump .6s cubic-bezier(.3, 1.4, .5, 1); }
+@keyframes jump {
+  0%   { transform: translateY(0) scale(1.06, .9); }
+  40%  { transform: translateY(-34px) scale(.95, 1.08); }
+  70%  { transform: translateY(0) scale(1.06, .92); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+.cheer-btn {
+  margin-top: 20px;
+  font: 700 1.35rem/1 var(--font-body);
+  color: #fff;
+  background: var(--pink-deep);
+  border: 3px solid #fff;
+  outline: 3px solid var(--pink-deep);
+  border-radius: 999px;
+  padding: 16px 34px;
+  cursor: pointer;
+  box-shadow: 0 7px 0 var(--pink-deeper);
+  transition: transform .12s, box-shadow .12s;
+  animation: heartbeat 2s ease-in-out infinite;
+  -webkit-tap-highlight-color: transparent;
+}
+.cheer-btn:hover { transform: translateY(-2px) rotate(-1deg); box-shadow: 0 9px 0 var(--pink-deeper); }
+.cheer-btn:active { transform: translateY(5px); box-shadow: 0 2px 0 var(--pink-deeper); animation: none; }
+.cheer-btn:focus-visible { outline-color: var(--ink); outline-offset: 4px; }
+.cheer-ico { display: inline-block; margin-right: 4px; }
+@keyframes heartbeat { 0%, 60%, 100% { scale: 1; } 70% { scale: 1.05; } 80% { scale: 1; } 90% { scale: 1.05; } }
+
+.counter { margin-top: 16px; font-size: .95rem; color: var(--ink-soft); }
+.counter b { color: var(--pink-deep); font-size: 1.15em; }
+
+/* ============ การ์ดทั่วไป ============ */
+.card {
+  background: #fff;
+  border: 3px solid var(--pink);
+  border-radius: var(--radius);
+  padding: 26px 20px 28px;
+  margin-top: 28px;
+  box-shadow: 0 8px 0 var(--pink-soft);
+}
+
+.section-title {
+  text-align: center;
+  font-size: clamp(1.45rem, 5.4vw, 1.9rem);
+  text-decoration: underline wavy var(--pink);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 9px;
+}
+.section-sub { text-align: center; color: var(--ink-soft); margin-top: 14px; font-size: .95rem; }
+
+/* ============ นับถอยหลัง ============ */
+.cd-date { text-align: center; margin-top: 16px; font-weight: 700; color: var(--pink-deeper); }
+
+.cd-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+.tile {
+  border: 3px solid rgba(123, 74, 95, .25);
+  border-radius: 22px;
+  padding: 12px 4px 8px;
+  text-align: center;
+  line-height: 1.2;
+}
+.tile b {
+  display: block;
+  font: 400 clamp(1.9rem, 8.5vw, 3rem)/1.1 var(--font-display);
+  font-variant-numeric: tabular-nums;
+}
+.tile span { font-size: .85rem; font-weight: 600; color: var(--ink-soft); }
+.t-pink   { background: var(--pink-soft); transform: rotate(-2deg); }
+.t-lav    { background: var(--lav);       transform: rotate(1.5deg); }
+.t-mint   { background: var(--mint);      transform: rotate(-1.5deg); }
+.t-butter { background: var(--butter);    transform: rotate(2deg); }
+
+.cd-note {
+  margin-top: 20px;
+  text-align: center;
+  background: var(--pink-soft);
+  border-radius: 18px;
+  padding: 10px 14px;
+  font-weight: 600;
+}
+
+/* ============ จดหมาย ============ */
+.letter {
+  position: relative;
+  margin-top: 26px;
+  background: #FFFDF6;
+  border: 3px solid #F5E3B8;
+  border-radius: 12px;
+  padding: 26px 22px 20px 26px;
+  transform: rotate(-.6deg);
+  box-shadow: 0 6px 0 #F5E3B855;
+  background-image: repeating-linear-gradient(transparent 0 33px, #FFD9E4 33px 35px);
+  background-position: 0 26px;
+}
+.letter::before {
+  content: "";
+  position: absolute;
+  left: 14px; top: 0; bottom: 0;
+  border-left: 2px solid #FFB6CB88;
+}
+.letter p { line-height: 35px; margin-bottom: 35px; padding-left: 12px; }
+.letter p:last-of-type { margin-bottom: 0; }
+.letter .sign { text-align: right; font-weight: 700; color: var(--pink-deeper); margin-top: 0; }
+.letter p:first-of-type { padding-right: 52px; }
+.exam-day { background: var(--butter); padding: 0 .35em; border-radius: 8px; font-weight: 700; }
+.tape {
+  position: absolute;
+  top: -16px; left: 50%;
+  width: 96px; height: 28px;
+  transform: translateX(-50%) rotate(3deg);
+  background: repeating-linear-gradient(135deg, #CDEFE0cc 0 8px, #E5F7EEcc 8px 16px);
+  border-radius: 4px;
+}
+.stamp {
+  position: absolute;
+  top: 14px; right: 14px;
+  width: 44px; height: 52px;
+  display: grid; place-items: center;
+  font-size: 1.5rem;
+  background: #fff;
+  border: 2px dashed #FFB6CB;
+  border-radius: 4px;
+  transform: rotate(6deg);
+}
+
+/* ============ ประมวลกำลังใจ ============ */
+.laws {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-top: 22px;
+}
+.law {
+  border-radius: 22px;
+  padding: 16px 18px 18px;
+  border: 3px solid rgba(123, 74, 95, .22);
+  transition: transform .25s cubic-bezier(.3, 1.5, .5, 1);
+}
+.law:hover { transform: translateY(-5px) rotate(-1deg); }
+.law h3 { font-size: 1.25rem; color: var(--pink-deeper); margin-bottom: 4px; }
+.law p { font-size: .98rem; line-height: 1.65; }
+.law.wide { grid-column: 1 / -1; text-align: center; border-style: dashed; }
+.l1 { background: var(--pink-soft); }
+.l2 { background: var(--lav); }
+.l3 { background: var(--mint); }
+.l4 { background: var(--butter); }
+.l5 { background: var(--peach); }
+.l6 { background: #DDEBFF; }
+.l7 { background: #fff; border-color: var(--pink); }
+
+/* ============ เช็กลิสต์ ============ */
+.progress {
+  margin-top: 18px;
+  height: 22px;
+  background: var(--pink-soft);
+  border: 3px solid var(--pink);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background: repeating-linear-gradient(45deg, var(--pink-deep) 0 12px, #FF7FA3 12px 24px);
+  transition: width .5s cubic-bezier(.3, 1.3, .5, 1);
+}
+.progress-text { text-align: center; font-weight: 700; margin-top: 8px; color: var(--pink-deeper); }
+
+.checklist { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 10px; }
+.check {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  background: #FFFAFC;
+  border: 3px solid var(--pink-soft);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background .2s, border-color .2s, transform .15s;
+}
+.check:hover { border-color: var(--pink); transform: translateX(3px); }
+.check input { position: absolute; opacity: 0; pointer-events: none; }
+.check .box {
+  flex: none;
+  width: 30px; height: 30px;
+  border: 3px solid var(--pink);
+  border-radius: 10px;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-weight: 700;
+  transition: background .2s, border-color .2s, transform .25s cubic-bezier(.3, 1.8, .5, 1);
+}
+.check .box::after { content: "✓"; transform: scale(0); transition: transform .25s cubic-bezier(.3, 1.8, .5, 1); }
+.check input:checked + .box { background: var(--pink-deep); border-color: var(--pink-deep); transform: rotate(-6deg) scale(1.05); }
+.check input:checked + .box::after { transform: scale(1); }
+.check input:checked ~ .txt { text-decoration: line-through; text-decoration-color: var(--pink-deep); color: var(--ink-soft); }
+.check:has(input:checked) { background: var(--pink-soft); border-color: var(--pink); }
+.check:has(input:focus-visible) { outline: 3px solid var(--pink-deep); outline-offset: 2px; }
+.check .txt { line-height: 1.45; }
+
+/* ============ สุ่มรางวัล ============ */
+.reward { text-align: center; }
+.reward-box {
+  margin: 20px auto 0;
+  max-width: 340px;
+  background: var(--lav);
+  border: 3px dashed #B79CF0;
+  border-radius: 24px;
+  padding: 20px 14px;
+  display: grid;
+  gap: 4px;
+  place-items: center;
+}
+.reward-emoji { font-size: 3.6rem; line-height: 1.1; }
+.reward-text { font: 400 1.5rem/1.3 var(--font-display); }
+.reward-box.spin .reward-emoji { animation: shake .5s ease-in-out; }
+@keyframes shake {
+  0%, 100% { transform: rotate(0) scale(1); }
+  20% { transform: rotate(-18deg) scale(1.15); }
+  40% { transform: rotate(16deg) scale(1.2); }
+  60% { transform: rotate(-12deg) scale(1.15); }
+  80% { transform: rotate(8deg) scale(1.1); }
+}
+.gacha-btn {
+  margin-top: 20px;
+  font: 700 1.15rem/1 var(--font-body);
+  color: #3F2A66;
+  background: #D2BEFF;
+  border: 3px solid #fff;
+  outline: 3px solid #B79CF0;
+  border-radius: 999px;
+  padding: 14px 28px;
+  cursor: pointer;
+  box-shadow: 0 6px 0 #9F82E0;
+  transition: transform .12s, box-shadow .12s;
+}
+.gacha-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #9F82E0; }
+.gacha-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #9F82E0; }
+
+/* ============ footer ============ */
+.footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 36px 16px 48px;
+  color: var(--ink-soft);
+}
+.footer .small { font-size: .9rem; margin-top: 4px; }
+
+/* ============ อนุภาค (หัวใจ/confetti) ============ */
+.particle { position: fixed; z-index: 50; pointer-events: none; user-select: none; will-change: transform, opacity; }
+
+/* ============ เลื่อนแล้วค่อยโผล่ ============ */
+.js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .6s ease, transform .6s cubic-bezier(.3, 1.3, .5, 1); }
+.js .reveal.in { opacity: 1; transform: none; }
+
+/* ============ มือถือจอเล็ก ============ */
+@media (max-width: 420px) {
+  body { font-size: 17px; }
+  .card { padding: 22px 14px 24px; }
+  .cd-tiles { gap: 7px; }
+  .letter { padding: 24px 14px 18px 20px; }
+  .letter::before { left: 10px; }
+  .letter p { padding-left: 8px; }
+  .cheer-btn { font-size: 1.2rem; padding: 15px 28px; }
+}
+
+/* ============ ลดการเคลื่อนไหว ============ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .js .reveal { opacity: 1; transform: none; }
+  .bg-float { display: none; }
+}
