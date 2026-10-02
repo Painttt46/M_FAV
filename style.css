@@ -132,7 +132,7 @@ p { margin: 0; }
 }
 .mascot { width: 100%; height: auto; overflow: visible; display: block; }
 
-.bunny { transform-box: fill-box; transform-origin: 50% 100%; animation: bob 3s ease-in-out infinite; }
+.pup { transform-box: fill-box; transform-origin: 50% 100%; animation: bob 3s ease-in-out infinite; }
 @keyframes bob {
   0%, 100% { transform: translateY(0) scale(1, 1); }
   50%      { transform: translateY(-6px) scale(1.01, .995); }
@@ -155,10 +155,13 @@ p { margin: 0; }
 .scale { transform-box: fill-box; transform-origin: 50% 100%; animation: sway 3.4s ease-in-out infinite; }
 @keyframes sway { 0%, 100% { transform: rotate(-2.5deg); } 50% { transform: rotate(2.5deg); } }
 
+.tail { transform-box: fill-box; transform-origin: 85% 95%; animation: wag .7s ease-in-out infinite; }
+@keyframes wag { 0%, 100% { transform: rotate(-12deg); } 50% { transform: rotate(14deg); } }
+
 .band-tails { transform-box: fill-box; transform-origin: 100% 40%; animation: flap 1.2s ease-in-out infinite; }
 @keyframes flap { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-9deg); } }
 
-.mascot-btn.jump .bunny { animation: jump .6s cubic-bezier(.3, 1.4, .5, 1); }
+.mascot-btn.jump .pup { animation: jump .6s cubic-bezier(.3, 1.4, .5, 1); }
 @keyframes jump {
   0%   { transform: translateY(0) scale(1.06, .9); }
   40%  { transform: translateY(-34px) scale(.95, 1.08); }
@@ -245,49 +248,47 @@ p { margin: 0; }
   font-weight: 600;
 }
 
-/* ============ จดหมาย ============ */
-.letter {
-  position: relative;
-  margin-top: 26px;
+/* ============ ศาลกวน ๆ ============ */
+.court { text-align: center; }
+.verdict {
+  margin: 22px auto 0;
+  max-width: 460px;
+  min-height: 190px;
   background: #FFFDF6;
-  border: 3px solid #F5E3B8;
-  border-radius: 12px;
-  padding: 26px 22px 20px 26px;
-  transform: rotate(-.6deg);
-  box-shadow: 0 6px 0 #F5E3B855;
-  background-image: repeating-linear-gradient(transparent 0 33px, #FFD9E4 33px 35px);
-  background-position: 0 26px;
+  border: 3px dashed #F2D56B;
+  border-radius: 20px;
+  padding: 18px 18px 20px;
+  display: grid;
+  place-items: center;
+  text-align: left;
 }
-.letter::before {
-  content: "";
-  position: absolute;
-  left: 14px; top: 0; bottom: 0;
-  border-left: 2px solid #FFB6CB88;
+.verdict-empty { text-align: center; color: var(--ink-soft); }
+.verdict-case { font-family: var(--font-display); font-size: 1.25rem; color: var(--pink-deeper); text-align: center; width: 100%; margin-bottom: 8px; }
+.verdict dl { margin: 0; width: 100%; display: grid; gap: 8px; }
+.verdict dt { font-size: .85rem; font-weight: 700; color: var(--ink-soft); }
+.verdict dd { margin: 0; line-height: 1.55; }
+.verdict .v-final { background: var(--butter); border-radius: 14px; padding: 8px 12px; font-weight: 700; }
+.verdict.slam { animation: slam .5s cubic-bezier(.3, 1.6, .5, 1); }
+@keyframes slam {
+  0%   { transform: scale(1.18) rotate(-2deg); opacity: .4; }
+  60%  { transform: scale(.97) rotate(1deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0); }
 }
-.letter p { line-height: 35px; margin-bottom: 35px; padding-left: 12px; }
-.letter p:last-of-type { margin-bottom: 0; }
-.letter .sign { text-align: right; font-weight: 700; color: var(--pink-deeper); margin-top: 0; }
-.letter p:first-of-type { padding-right: 52px; }
-.exam-day { background: var(--butter); padding: 0 .35em; border-radius: 8px; font-weight: 700; }
-.tape {
-  position: absolute;
-  top: -16px; left: 50%;
-  width: 96px; height: 28px;
-  transform: translateX(-50%) rotate(3deg);
-  background: repeating-linear-gradient(135deg, #CDEFE0cc 0 8px, #E5F7EEcc 8px 16px);
-  border-radius: 4px;
+.gavel-btn {
+  margin-top: 22px;
+  font: 700 1.15rem/1 var(--font-body);
+  color: #5B3A0E;
+  background: #FFD66B;
+  border: 3px solid #fff;
+  outline: 3px solid #E2A93B;
+  border-radius: 999px;
+  padding: 14px 28px;
+  cursor: pointer;
+  box-shadow: 0 6px 0 #C99A2E;
+  transition: transform .12s, box-shadow .12s;
 }
-.stamp {
-  position: absolute;
-  top: 14px; right: 14px;
-  width: 44px; height: 52px;
-  display: grid; place-items: center;
-  font-size: 1.5rem;
-  background: #fff;
-  border: 2px dashed #FFB6CB;
-  border-radius: 4px;
-  transform: rotate(6deg);
-}
+.gavel-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #C99A2E; }
+.gavel-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 #C99A2E; }
 
 /* ============ ประมวลกำลังใจ ============ */
 .laws {
@@ -427,9 +428,6 @@ p { margin: 0; }
   body { font-size: 17px; }
   .card { padding: 22px 14px 24px; }
   .cd-tiles { gap: 7px; }
-  .letter { padding: 24px 14px 18px 20px; }
-  .letter::before { left: 10px; }
-  .letter p { padding-left: 8px; }
   .cheer-btn { font-size: 1.2rem; padding: 15px 28px; }
 }
 

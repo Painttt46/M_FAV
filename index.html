@@ -34,28 +34,35 @@
       <p class="sub">แฟร์ทำได้อยู่แล้ว เป็นกำลังใจให้นะ ✨</p>
 
       <div class="stage">
-        <div class="bubble" id="bubble" aria-live="polite">กดที่ตัวน้องกระต่ายได้นะ 🐰</div>
+        <div class="bubble" id="bubble" aria-live="polite">กดที่ตัวน้องหมาได้นะ 🐶</div>
 
-        <button class="mascot-btn" id="mascotBtn" type="button" aria-label="จิ้มน้องกระต่ายเพื่อรับกำลังใจ">
+        <button class="mascot-btn" id="mascotBtn" type="button" aria-label="จิ้มน้องหมาเพื่อรับกำลังใจ">
           <svg class="mascot" viewBox="0 0 270 280" aria-hidden="true">
             <ellipse class="shadow" cx="125" cy="266" rx="72" ry="9" fill="#5A3A4B" opacity=".12"/>
 
-            <g class="bunny">
+            <g class="pup">
+              <!-- หาง -->
+              <g class="tail">
+                <path d="M84 238 Q40 242 46 204" fill="none" stroke="#7B4A5F" stroke-width="19" stroke-linecap="round"/>
+                <path d="M84 238 Q40 242 46 204" fill="none" stroke="#F5C48A" stroke-width="11" stroke-linecap="round"/>
+              </g>
+
               <!-- หู -->
               <g class="ear ear-l">
-                <ellipse cx="86" cy="62" rx="21" ry="50" transform="rotate(-10 86 62)" fill="#fff" stroke="#7B4A5F" stroke-width="4"/>
-                <ellipse cx="86" cy="68" rx="10" ry="31" transform="rotate(-10 86 68)" fill="#FFB6CB"/>
+                <path d="M60 104 Q52 62 66 38 Q70 33 76 37 Q104 54 114 78 Z" fill="#F5C48A" stroke="#7B4A5F" stroke-width="4" stroke-linejoin="round"/>
+                <path d="M70 92 Q66 62 72 50 Q92 62 100 80 Z" fill="#FFB6CB"/>
               </g>
               <g class="ear ear-r">
-                <ellipse cx="164" cy="62" rx="21" ry="50" transform="rotate(10 164 62)" fill="#fff" stroke="#7B4A5F" stroke-width="4"/>
-                <ellipse cx="164" cy="68" rx="10" ry="31" transform="rotate(10 164 68)" fill="#FFB6CB"/>
+                <path d="M190 104 Q198 62 184 38 Q180 33 174 37 Q146 54 136 78 Z" fill="#F5C48A" stroke="#7B4A5F" stroke-width="4" stroke-linejoin="round"/>
+                <path d="M180 92 Q184 62 178 50 Q158 62 150 80 Z" fill="#FFB6CB"/>
               </g>
 
               <!-- ตัว -->
-              <ellipse cx="125" cy="214" rx="54" ry="46" fill="#fff" stroke="#7B4A5F" stroke-width="4"/>
-              <polygon points="125.0,207.0 129.0,216.5 139.3,217.4 131.5,224.1 133.8,234.1 125.0,228.8 116.2,234.1 118.5,224.1 110.7,217.4 121.0,216.5" fill="#FFD66B" stroke="#E2A93B" stroke-width="2" stroke-linejoin="round"/>
-              <ellipse cx="97" cy="256" rx="20" ry="10" fill="#fff" stroke="#7B4A5F" stroke-width="4"/>
-              <ellipse cx="153" cy="256" rx="20" ry="10" fill="#fff" stroke="#7B4A5F" stroke-width="4"/>
+              <ellipse cx="125" cy="214" rx="54" ry="46" fill="#F5C48A" stroke="#7B4A5F" stroke-width="4"/>
+              <ellipse cx="125" cy="224" rx="31" ry="28" fill="#FFF4E2"/>
+              <polygon points="125.0,210.0 128.8,218.8 138.3,219.7 131.1,226.0 133.2,235.3 125.0,230.4 116.8,235.3 118.9,226.0 111.7,219.7 121.2,218.8" fill="#FFD66B" stroke="#E2A93B" stroke-width="2" stroke-linejoin="round"/>
+              <ellipse cx="97" cy="256" rx="20" ry="10" fill="#FFF4E2" stroke="#7B4A5F" stroke-width="4"/>
+              <ellipse cx="153" cy="256" rx="20" ry="10" fill="#FFF4E2" stroke="#7B4A5F" stroke-width="4"/>
 
               <!-- ตราชั่ง -->
               <g class="scale">
@@ -79,8 +86,13 @@
                 </g>
               </g>
 
-              <!-- หัว -->
-              <ellipse cx="125" cy="134" rx="74" ry="64" fill="#fff" stroke="#7B4A5F" stroke-width="4"/>
+              <!-- หัว + แก้มสีครีม -->
+              <ellipse cx="125" cy="134" rx="74" ry="64" fill="#F5C48A" stroke="#7B4A5F" stroke-width="4"/>
+              <g fill="#FFF4E2">
+                <ellipse cx="100" cy="171" rx="30" ry="21"/>
+                <ellipse cx="150" cy="171" rx="30" ry="21"/>
+                <ellipse cx="125" cy="168" rx="26" ry="22"/>
+              </g>
 
               <!-- ผ้าคาดหัว "สู้" -->
               <g class="band-tails">
@@ -92,25 +104,27 @@
 
               <!-- หน้า -->
               <g class="eyes">
-                <ellipse cx="98" cy="150" rx="6.5" ry="8.5" fill="#4A2C3A"/>
-                <ellipse cx="152" cy="150" rx="6.5" ry="8.5" fill="#4A2C3A"/>
-                <circle cx="100" cy="147" r="2.7" fill="#fff"/>
-                <circle cx="154" cy="147" r="2.7" fill="#fff"/>
-                <circle cx="96" cy="153" r="1.3" fill="#fff"/>
-                <circle cx="150" cy="153" r="1.3" fill="#fff"/>
+                <ellipse cx="98" cy="149" rx="6.5" ry="8.5" fill="#4A2C3A"/>
+                <ellipse cx="152" cy="149" rx="6.5" ry="8.5" fill="#4A2C3A"/>
+                <circle cx="100" cy="146" r="2.7" fill="#fff"/>
+                <circle cx="154" cy="146" r="2.7" fill="#fff"/>
+                <circle cx="96" cy="152" r="1.3" fill="#fff"/>
+                <circle cx="150" cy="152" r="1.3" fill="#fff"/>
               </g>
-              <ellipse cx="76" cy="167" rx="12" ry="7" fill="#FFB6CB" opacity=".85"/>
-              <ellipse cx="174" cy="167" rx="12" ry="7" fill="#FFB6CB" opacity=".85"/>
-              <ellipse cx="125" cy="160" rx="4.5" ry="3.2" fill="#FF8FB0"/>
-              <path d="M114 167 q5.5 7 11 0 q5.5 7 11 0" fill="none" stroke="#4A2C3A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <ellipse cx="76" cy="164" rx="9.5" ry="5.5" fill="#FF9DB8" opacity=".75"/>
+              <ellipse cx="174" cy="164" rx="9.5" ry="5.5" fill="#FF9DB8" opacity=".75"/>
+              <path d="M119.500 173.500 Q125 192 130.500 173.500 Z" fill="#FF8FB0" stroke="#D85A85" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M125 165 L125 169 M113 169 Q119 177 125 169 Q131 177 137 169" fill="none" stroke="#4A2C3A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <ellipse cx="125" cy="159" rx="8.5" ry="6" fill="#4A2C3A"/>
+              <ellipse cx="122.500" cy="157" rx="2.600" ry="1.500" fill="#fff" opacity=".85"/>
 
               <!-- แขนข้างขวา จับตราชั่ง -->
-              <ellipse cx="184" cy="214" rx="22" ry="12" transform="rotate(-12 184 214)" fill="#fff" stroke="#7B4A5F" stroke-width="4"/>
-              <circle cx="207" cy="210" r="11" fill="#fff" stroke="#7B4A5F" stroke-width="4"/>
+              <ellipse cx="184" cy="214" rx="22" ry="12" transform="rotate(-12 184 214)" fill="#F5C48A" stroke="#7B4A5F" stroke-width="4"/>
+              <circle cx="207" cy="210" r="11" fill="#FFF4E2" stroke="#7B4A5F" stroke-width="4"/>
 
               <!-- แขนข้างซ้าย โบกมือ -->
               <g class="arm-l">
-                <ellipse cx="68" cy="196" rx="13" ry="25" transform="rotate(32 68 196)" fill="#fff" stroke="#7B4A5F" stroke-width="4"/>
+                <ellipse cx="68" cy="196" rx="13" ry="25" transform="rotate(32 68 196)" fill="#F5C48A" stroke="#7B4A5F" stroke-width="4"/>
               </g>
             </g>
           </svg>
@@ -136,18 +150,14 @@
       <p class="cd-note" id="cdNote"></p>
     </section>
 
-    <!-- ================= LETTER ================= -->
-    <section class="card reveal" aria-labelledby="letterTitle">
-      <h2 class="section-title" id="letterTitle">✉️ ข้อความถึงแฟร์</h2>
-      <div class="letter">
-        <span class="tape" aria-hidden="true"></span>
-        <p>ถึง แฟร์</p>
-        <p>ช่วงนี้คงอ่านหนังสือหนักอยู่เลยใช่มั้ย ตัวบทก็เยอะ มาตราก็เยอะ แต่เห็นแฟร์ตั้งใจมากเลยนะ เก่งมากจริง ๆ</p>
-        <p>วันที่ <span class="exam-day">10</span> นี้ ไม่ต้องกดดันตัวเองเกินไปนะ เต็มที่เท่าที่ทำได้ก็พอแล้ว ถ้าเหนื่อยก็พักได้ แล้วค่อยลุยต่อนะ</p>
-        <p>ขอให้ทุกอย่างที่อ่านมาออกมาครบทุกมาตรา สมองแล่น มือลื่น ใจนิ่ง แล้วไว้มาเล่าให้ฟังหลังสอบนะ 🌷</p>
-        <p class="sign">เป็นกำลังใจให้นะ ✨</p>
-        <span class="stamp" aria-hidden="true">⚖️</span>
+    <!-- ================= ศาลกวน ๆ ================= -->
+    <section class="card reveal court" aria-labelledby="courtTitle">
+      <h2 class="section-title" id="courtTitle">🔨 ศาลกวน ๆ เปิดพิจารณาคดี</h2>
+      <p class="section-sub">ยื่นฟ้องสิ่งที่ทำให้กังวล แล้วให้ศาลพิพากษาให้เลย</p>
+      <div class="verdict" id="verdict" aria-live="polite">
+        <p class="verdict-empty">⚖️ ยังไม่มีคดีขึ้นศาล<br>กดปุ่มด้านล่างเพื่อยื่นฟ้อง</p>
       </div>
+      <button class="gavel-btn" id="gavelBtn" type="button">🔨 ยื่นฟ้อง + เคาะค้อน!</button>
     </section>
 
     <!-- ================= ประมวลกำลังใจ ================= -->

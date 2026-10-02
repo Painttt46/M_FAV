@@ -26,6 +26,20 @@ const CHEER_MESSAGES = [
   'สู้ ๆ นะ ขอให้ทุกอย่างผ่านไปด้วยดี 🌈',
 ];
 
+const COURT_CASES = [
+  ['ความกังวล', 'แอบมากวนใจตอนจะหลับ', 'จำคุกตลอดชีวิตในกล่องความคิด ห้ามประกันตัว'],
+  ['ความขี้เกียจ', 'ชวนไปดูซีรีส์ ทั้งที่ยังอ่านไม่จบบท', 'ปรับให้อ่านอีกหนึ่งบท แล้วค่อยดูต่อได้ครึ่งตอน'],
+  ['อาการลืมมาตรา', 'หายตัวไปตอนเปิดข้อสอบ', 'ให้ปรากฏตัวภายในสามวินาที ฝ่าฝืนต้องไปนั่งทวนใหม่'],
+  ['ความง่วงตอนเที่ยงคืน', 'ลักลอบเข้ามาตอนกำลังทบทวน', 'ศาลสั่งให้งีบ 20 นาที แล้วลุกมากินขนมต่อ'],
+  ['ความคิดว่าตัวเองไม่เก่ง', 'ใส่ร้ายเจ้าของร่างโดยไม่มีพยานหลักฐาน', 'ยกฟ้อง! ศาลเห็นว่าแฟร์เก่งเกินกว่าจะถูกใส่ร้าย'],
+  ['โทรศัพท์มือถือ', 'ดึงสมาธิระหว่างอ่านหนังสือ', 'ศาลสั่งให้คว่ำจอ 25 นาที พักแล้วค่อยเล่นได้'],
+  ['ความตื่นเต้นหน้าห้องสอบ', 'ทำให้มือเย็นและใจเต้นรัว', 'ให้หายใจเข้า-ออกลึก ๆ สามครั้ง คดีเป็นอันยุติ'],
+  ['ตัวบทกฎหมายเล่มหนา ๆ', 'หนาเกินกว่าเหตุ', 'ให้ถูกอ่านทีละหน้า แล้วจะบางลงเองโดยปริยาย'],
+  ['ข้อสอบข้อยาก', 'ทำให้เกิดความเครียดโดยไม่จำเป็น', 'ศาลสั่งให้ข้ามไปทำข้อง่ายก่อน แล้วค่อยย้อนกลับมาสู้'],
+  ['ชานมไข่มุก', 'ล่อลวงให้ใจสั่นก่อนสอบ', 'ศาลอนุญาตให้ดื่มได้หนึ่งแก้ว หลังสอบเสร็จเท่านั้น'],
+  ['กองหนังสือสูงเป็นภูเขา', 'ข่มขวัญเจ้าของโต๊ะอ่านหนังสือ', 'ศาลเห็นว่าแฟร์อ่านมาแล้วเยอะกว่าที่คิด ให้ยกฟ้อง'],
+];
+
 const CHECKLIST = [
   ['📚', 'ทบทวนมาตราสำคัญรอบสุดท้าย (แค่เบา ๆ ไม่ต้องอัดหนัก)'],
   ['🪪', 'เตรียมบัตรประชาชน / เอกสารเข้าสอบ'],
@@ -187,10 +201,8 @@ function tickCountdown() {
   const opt = { timeZone: 'Asia/Bangkok' };
   const short = examAt.toLocaleDateString('th-TH', { ...opt, day: 'numeric', month: 'long' });
   const full = examAt.toLocaleDateString('th-TH', { ...opt, weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-  const day = examAt.toLocaleDateString('th-TH', { ...opt, day: 'numeric' });
   $('#examShort').textContent = short;
   $('#cdDate').textContent = `${full} · ${CONFIG.examTime} น.`;
-  document.querySelector('.exam-day').textContent = day;
 })();
 
 tickCountdown();
@@ -291,6 +303,48 @@ function renderProgress(fromUser) {
   }
 }
 renderProgress(false);
+
+/* ==========================================================
+   ศาลกวน ๆ
+   ========================================================== */
+const verdictBox = $('#verdict');
+let lastCase = -1;
+
+function thaiNum(n) { return n.toLocaleString('th-TH-u-nu-thai', { useGrouping: false }); }
+
+$('#gavelBtn').addEventListener('click', () => {
+  lastCase = pickDifferent(COURT_CASES, lastCase);
+  const [who, charge, ruling] = COURT_CASES[lastCase];
+  const year = examAt.toLocaleDateString('th-TH-u-nu-thai', { timeZone: 'Asia/Bangkok', year: 'numeric' }).replace('พ.ศ. ', '');
+
+  const title = document.createElement('div');
+  title.className = 'verdict-case';
+  title.textContent = `คดีดำที่ ${thaiNum(Math.floor(rand(1, 999)))}/${year}`;
+
+  const dl = document.createElement('dl');
+  [['จำเลย', who], ['ข้อหา', charge], ['คำพิพากษา', ruling]].forEach(([k, v], i) => {
+    const wrap = document.createElement('div');
+    const dt = document.createElement('dt');
+    dt.textContent = k;
+    const dd = document.createElement('dd');
+    dd.textContent = v;
+    if (i === 2) dd.className = 'v-final';
+    wrap.append(dt, dd);
+    dl.appendChild(wrap);
+  });
+
+  const box = document.createElement('div');
+  box.style.width = '100%';
+  box.append(title, dl);
+  verdictBox.replaceChildren(box);
+
+  verdictBox.classList.remove('slam');
+  void verdictBox.offsetWidth;
+  verdictBox.classList.add('slam');
+
+  const r = verdictBox.getBoundingClientRect();
+  burst(r.left + r.width / 2, r.top + 30, ['🔨', '⚖️', '✨', '💥'], 10);
+});
 
 /* ==========================================================
    สุ่มรางวัลหลังสอบ
